@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--  1. 无参构造  -->
+<!--        <bean id="student" class="com.mooc.sb2.ioc.xml.Student">-->
+<!--            <property name="name" value="zhangsan"/>-->
+<!--            <property name="age" value="13"/>-->
+<!--            <property name="courseList">-->
+<!--                <list>-->
+<!--                    <value>math</value>-->
+<!--                    <value>english</value>-->
+<!--                </list>-->
+<!--            </property>-->
+<!--        </bean>-->
+
+<!--    <bean id="helloService" class="com.mooc.sb2.ioc.xml.HelloService">-->
+<!--        <property name="student" ref="student"/>-->
+<!--    </bean>-->
+
+    <!-- 2. 有参构造 -->
+    <bean id="student" class="com.mooc.sb2.ioc.xml.Student">
+        <constructor-arg index="0" value="zhangsan"/>
+        <constructor-arg index="1" value="13"/>
+        <property name="courseList">
+            <list>
+                <value>math</value>
+                <value>english</value>
+            </list>
+        </property>
+    </bean>
+
+    <!--  3. 静态工厂方法  -->
+    <!--  调用工厂类AnimalFactory的静态方法getAnimal() 获取bean实例  -->
+<!--    <bean id="dog" class="com.mooc.sb2.ioc.xml.AnimalFactory" factory-method="getAnimal">-->
+<!--        <constructor-arg value="dog"/>-->
+<!--    </bean>-->
+<!--    <bean id="cat" class="com.mooc.sb2.ioc.xml.AnimalFactory" factory-method="getAnimal">-->
+<!--        <constructor-arg value="cat"/>-->
+<!--    </bean>-->
+
+<!--    <bean id="helloService" class="com.mooc.sb2.ioc.xml.HelloService">-->
+<!--        <property name="student" ref="student"/>-->
+<!--        <property name="animal" ref="dog"/>-->
+<!--    </bean>-->
+
+    <!--  4. 实例工厂方法  -->
+    <bean id="animalFactory" class="com.mooc.sb2.ioc.xml.AnimalFactory2" />
+    <!--  通过调用工厂实例对象animalFactory的getAnimal方法, 创建 cat对象  -->
+    <bean id="cat" factory-bean="animalFactory" factory-method="getAnimal">
+        <constructor-arg value="cat"/>
+    </bean>
+    <bean id="dog" factory-bean="animalFactory" factory-method="getAnimal">
+        <constructor-arg value="dog"/>
+    </bean>
+    <bean id="helloService" class="com.mooc.sb2.ioc.xml.HelloService">
+        <property name="animal" ref="cat"/>
+    </bean>
+</beans>

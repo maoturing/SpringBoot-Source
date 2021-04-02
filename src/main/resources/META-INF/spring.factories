@@ -1,0 +1,5 @@
+# 自定义系统初始化器
+org.springframework.context.ApplicationContextInitializer=com.mooc.sb2.initializer.FirstInitializer
+
+# 自定义监听器
+org.springframework.context.ApplicationListener=com.mooc.sb2.listener.FirstListener, com.mooc.sb2.listener.FourthListener
